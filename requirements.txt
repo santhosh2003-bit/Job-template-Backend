@@ -13,3 +13,4 @@ langchain_google_genai
 psycopg2
 linkedin-jobs-scraper
 flask-cors
+gunicorn
