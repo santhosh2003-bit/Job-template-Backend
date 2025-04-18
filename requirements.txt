@@ -1,0 +1,15 @@
+Flask
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Login
+Werkzeug
+email-validator
+Flask-Mail
+python-dotenv
+pymupdf
+langchain
+langchain-community
+langchain_google_genai
+psycopg2
+linkedin-jobs-scraper
+flask-cors
