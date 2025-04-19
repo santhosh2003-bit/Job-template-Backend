@@ -18,7 +18,8 @@ load_dotenv(dotenv_path)
 # log_path = os.environ.get()
 
 app = Flask(__name__, static_folder="static")
-CORS(app)
+# CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config.from_object(Config)
 
 db = SQLAlchemy()
