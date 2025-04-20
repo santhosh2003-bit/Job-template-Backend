@@ -7,8 +7,8 @@ from app.server import db
 from flask_login import current_user
 from app.db.jobsearchusagemodel import JobSearchUsage
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 api_routes = Blueprint("api", __name__)
 
 UPLOAD_FOLDER = "uploads"
@@ -150,18 +150,18 @@ def job_recommendations():
             os.remove(resume_path)
 
 
+
 def get_page_title(url):
     chrome_options = Options()
-    chrome_options.binary_location = os.getenv("GOOGLE_CHROME_BIN")
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    service = Service(executable_path=os.getenv("CHROMEDRIVER_PATH"))
+    service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     driver.get(url)
     title = driver.title
     driver.quit()
     return title
-            
