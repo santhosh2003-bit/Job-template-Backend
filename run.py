@@ -1,6 +1,7 @@
 from app.server import app
 from app.routes.route import api_routes
 from app.auth.routes import auth_routes
+import os
 
 app.register_blueprint(auth_routes, url_prefix="/auth")
 app.register_blueprint(api_routes)
