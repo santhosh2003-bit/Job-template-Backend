@@ -102,8 +102,53 @@ def process_job_data(data: EventData):
     }
     job_results.append(job_info)
 
-
 def search_jobs(job_profile, experience):
+    """
+    Scrape jobs based on job profile and experience level.
+    """
+    experience_filter = EXPERIENCE_MAPPING.get(experience, ExperienceLevelFilters.EXECUTIVE)
+
+    scraper = LinkedinScraper(
+        chrome_executable_path=None,
+        chrome_binary_location=None,
+        chrome_options=None,
+        headless=True,
+        max_workers=1,
+        slow_mo=0.5,
+        page_load_timeout=40
+    )
+
+    scraper.on(Events.DATA, process_job_data)
+
+    query = Query(
+        query=job_profile,
+        options=QueryOptions(
+            locations=['India'],
+            apply_link=True,
+            skip_promoted_jobs=True,
+            limit=10,
+            filters=QueryFilters(
+                time=TimeFilters.WEEK,
+                experience=experience_filter
+            )
+        )
+    )
+
+    try:
+        scraper.run([query])
+    except Exception as e:
+        print(f"Error during scraping: {e}")
+        return []
+
+    # Check if job_results is empty
+    if not job_results:
+        print("No jobs found.")
+        return []
+
+    return job_results
+
+
+# def search_jobs(job_profile, experience):
     """
     Scrape jobs based on job profile and experience level.
     """
