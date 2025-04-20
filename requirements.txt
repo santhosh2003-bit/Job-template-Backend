@@ -14,3 +14,4 @@ psycopg2
 linkedin-jobs-scraper
 flask-cors
 gunicorn
+selenium
